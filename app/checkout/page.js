@@ -1,9 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react'; // 
 import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
 
@@ -269,5 +269,16 @@ export default function CheckoutPage() {
         </div>
       )}
     </div>
+  );
+}
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#FEF6E3]/20 flex items-center justify-center">
+        <p className="text-xs text-gray-400 animate-pulse font-mono">Memuat Invoice...</p>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }
