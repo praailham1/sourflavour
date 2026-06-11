@@ -1,9 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -155,5 +155,17 @@ export default function Home() {
         </form>
       </div>
     </div>
+  );
+}
+// Paste ini di bagian paling bawah file app/page.js ya, Bro!
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#FEF6E3]/20 flex items-center justify-center">
+        <p className="text-xs text-gray-400 animate-pulse font-mono">Memuat Form Pemesanan...</p>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   );
 }
