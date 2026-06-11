@@ -1,5 +1,8 @@
 @import "tailwindcss";
-
+/* Update CSS Force Trigger Vercel Build */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @theme {
   --color-background: #FEF6E3; /* Soft Cream */
   --color-foreground: #1B1A17; /* Dark Accent */
