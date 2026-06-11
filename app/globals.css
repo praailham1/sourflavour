@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #FEF6E3; /* Soft Cream */
+  --color-foreground: #1B1A17; /* Dark Accent */
+  --color-primary: #525F41;    /* Moss Green */
+}
+
+:root {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+body {
+  font-family: 'Literata', serif, system-ui, sans-serif;
+}
