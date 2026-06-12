@@ -554,7 +554,7 @@ export default function AdminDashboard() {
         <div className="xl:col-span-1 space-y-6 sticky top-8 h-fit">
           
           {/* 🟦 KOTAK BIRU: REAL-TIME INVOICE PREVIEW */}
-          {selectedOrder ? (
+          {selectedOrder ? 
             <div className="bg-white rounded-xl shadow-xs border border-[#525F41]/10 p-6 space-y-6 animate-fadeIn">
               <div className="flex justify-between items-center border-b border-gray-100 pb-3">
                 <h3 className="font-serif font-bold text-gray-800">Detail & Invoice Preview</h3>
@@ -627,7 +627,7 @@ export default function AdminDashboard() {
                 🖨️ Cetak PDF Invoice
               </button>
             </div>
-          ) : (
+           : (
             <div className="bg-white rounded-xl border border-dashed border-[#525F41]/20 p-8 text-center text-gray-400 text-xs h-48 flex items-center justify-center font-mono">
               Pilih salah satu baris pesanan untuk melihat Pratinjau Invoice Real-time, Bro!
             </div>
