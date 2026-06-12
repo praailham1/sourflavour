@@ -303,27 +303,25 @@ export default function AdminDashboard() {
       {/* Trik CSS Injection: Menyembunyikan elemen non-invoice saat printer browser aktif */}
       <style>{`
         @media print {
-          body, html, main, __next {
-            background: white !important;
-            background-color: white !important;
+          /* Sembunyikan seluruh body & layout dashboard utama */
+          body * {
+            visibility: hidden !important;
           }
-          header, .xl\\:col-span-2, button, select, .text-gray-400, .sticky > div:first-child, .qris-manager-card, .master-product-card {
-            display: none !important;
+          /* Tampilkan KEMBALI area invoice secara eksklusif */
+          #nota-invoice-cetak, #nota-invoice-cetak * {
+            visibility: visible !important;
           }
-          .xl\\:col-span-1 {
-            width: 100% !important;
+          /* Atur posisi invoice pas di pojok kiri atas kertas printer */
+          #nota-invoice-cetak {
             position: absolute !important;
-            top: 0 !important;
             left: 0 !important;
-          }
-          .print-area {
+            top: 0 !important;
+            width: 100% !important;
+            max-width: 450px !important; /* Standar thermal / A4 mini */
             border: none !important;
             box-shadow: none !important;
             background: white !important;
             padding: 0 !important;
-            margin: 0 auto !important;
-            width: 100% !important;
-            max-width: 600px !important;
           }
         }
       `}</style>
@@ -574,6 +572,14 @@ export default function AdminDashboard() {
               </div>
 
               {/* AREA PRINT */}
+              <div 
+                id="nota-invoice-cetak" 
+                className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs"
+              >
+                <div className="text-center border-b border-gray-200 pb-3">
+                  <p className="font-serif font-bold text-sm text-[#525F41]">SOURFLAVOUR INVOICE</p>
+                  <p className="text-[9px] text-gray-400 mt-0.5">Artisanal Bakery & Cakes</p>
+                </div>
               <div className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs">
                 <div className="text-center border-b border-gray-200 pb-3">
                   <p className="font-serif font-bold text-sm text-[#525F41]">SOURFLAVOUR INVOICE</p>
