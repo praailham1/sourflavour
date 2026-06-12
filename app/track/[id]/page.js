@@ -149,7 +149,7 @@ export default function OrderTracking() {
 
         {/* Card 2: Real-time Visual Progress Tracker (Timeline Vertical) */}
         <div className="bg-white rounded-2xl p-6 shadow-xs border border-[#525F41]/10 space-y-6">
-          <h3 className="font-serif font-bold text-gray-800 text-sm border-b border-gray-100 pb-2">Progres Orderan Lo</h3>
+          <h3 className="font-serif font-bold text-gray-800 text-sm border-b border-gray-100 pb-2">Pantau pesananmu disini yaa</h3>
           
           <div className="relative pl-6 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-gray-100">
             {steps.map((step, idx) => {
