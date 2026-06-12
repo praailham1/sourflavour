@@ -300,26 +300,41 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#FEF6E3]/20 flex flex-col font-sans">
       
-      {/* Trik CSS Injection yang Dioptimasi: Menghindari Blank Page saat di Vercel */}
+      {/* Trik CSS Injection: Memaksa invoice naik ke halaman 1 & menghilangkan halaman blank */}
       <style>{`
         @media print {
-          body * {
-            visibility: hidden !important;
+          /* Sembunyikan navigasi atas dan layout grid utama dashboard agar tidak memakan ruang halaman */
+          header, main > div:first-child, .qris-manager-card, .master-product-card {
+            display: none !important;
           }
-          #nota-invoice-cetak, #nota-invoice-cetak * {
-            visibility: visible !important;
+          
+          /* Pastikan main container tidak menggunakan display flex/grid saat print */
+          main {
+            display: block !important;
+            padding: 0 !important;
+            margin: 0 !important;
           }
+
+          /* Hilangkan padding/margin default dari browser kertas */
+          body, html {
+            background: white !important;
+            background-color: white !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+
+          /* Maksimalkan area print invoice agar pas di halaman pertama */
           #nota-invoice-cetak {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
+            visibility: visible !important;
+            display: block !important;
+            position: relative !important;
             width: 100% !important;
-            max-width: 500px !important;
+            max-width: 450px !important;
+            margin: 0 auto !important;
             border: none !important;
             box-shadow: none !important;
             background: white !important;
-            padding: 0 !important;
-            margin: 0 !important;
+            padding: 10px !important;
           }
         }
       `}</style>
@@ -569,7 +584,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* AREA PRINT (Diberikan ID khusus agar dideteksi oleh CSS printer) */}
+              {/* AREA PRINT */}
               <div id="nota-invoice-cetak" className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs">
                 <div className="text-center border-b border-gray-200 pb-3">
                   <p className="font-serif font-bold text-sm text-[#525F41]">SOURFLAVOUR INVOICE</p>
