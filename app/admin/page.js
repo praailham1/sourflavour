@@ -300,28 +300,26 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#FEF6E3]/20 flex flex-col font-sans">
       
-      {/* Trik CSS Injection: Menyembunyikan elemen non-invoice saat printer browser aktif */}
+      {/* Trik CSS Injection yang Dioptimasi: Menghindari Blank Page saat di Vercel */}
       <style>{`
         @media print {
-          /* Sembunyikan seluruh body & layout dashboard utama */
           body * {
             visibility: hidden !important;
           }
-          /* Tampilkan KEMBALI area invoice secara eksklusif */
           #nota-invoice-cetak, #nota-invoice-cetak * {
             visibility: visible !important;
           }
-          /* Atur posisi invoice pas di pojok kiri atas kertas printer */
           #nota-invoice-cetak {
             position: absolute !important;
             left: 0 !important;
             top: 0 !important;
             width: 100% !important;
-            max-width: 450px !important; /* Standar thermal / A4 mini */
+            max-width: 500px !important;
             border: none !important;
             box-shadow: none !important;
             background: white !important;
             padding: 0 !important;
+            margin: 0 !important;
           }
         }
       `}</style>
@@ -553,8 +551,8 @@ export default function AdminDashboard() {
         {/* ================= RIGHT COLUMN (STICKY PANELS) ================= */}
         <div className="xl:col-span-1 space-y-6 sticky top-8 h-fit">
           
-          {/* 🟦 KOTAK BIRU: REAL-TIME INVOICE PREVIEW */}
-          {selectedOrder ? 
+          {/* 🟦 REAL-TIME INVOICE PREVIEW */}
+          {selectedOrder ? (
             <div className="bg-white rounded-xl shadow-xs border border-[#525F41]/10 p-6 space-y-6 animate-fadeIn">
               <div className="flex justify-between items-center border-b border-gray-100 pb-3">
                 <h3 className="font-serif font-bold text-gray-800">Detail & Invoice Preview</h3>
@@ -571,16 +569,8 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* AREA PRINT */}
-              <div 
-                id="nota-invoice-cetak" 
-                className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs"
-              >
-                <div className="text-center border-b border-gray-200 pb-3">
-                  <p className="font-serif font-bold text-sm text-[#525F41]">SOURFLAVOUR INVOICE</p>
-                  <p className="text-[9px] text-gray-400 mt-0.5">Artisanal Bakery & Cakes</p>
-                </div>
-              <div className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs">
+              {/* AREA PRINT (Diberikan ID khusus agar dideteksi oleh CSS printer) */}
+              <div id="nota-invoice-cetak" className="print-area border border-dashed border-[#525F41]/20 rounded-xl p-5 bg-[#FEF6E3]/30 font-mono text-[11px] text-gray-600 space-y-4 shadow-xs">
                 <div className="text-center border-b border-gray-200 pb-3">
                   <p className="font-serif font-bold text-sm text-[#525F41]">SOURFLAVOUR INVOICE</p>
                   <p className="text-[9px] text-gray-400 mt-0.5">Artisanal Bakery & Cakes</p>
@@ -627,13 +617,13 @@ export default function AdminDashboard() {
                 🖨️ Cetak PDF Invoice
               </button>
             </div>
-           : (
+          ) : (
             <div className="bg-white rounded-xl border border-dashed border-[#525F41]/20 p-8 text-center text-gray-400 text-xs h-48 flex items-center justify-center font-mono">
               Pilih salah satu baris pesanan untuk melihat Pratinjau Invoice Real-time, Bro!
             </div>
           )}
 
-          {/* 🟥 KOTAK MERAH: PENGATURAN QRIS FORM SUBMISSION */}
+          {/* PENGATURAN QRIS FORM SUBMISSION */}
           <div className="qris-manager-card bg-white rounded-xl shadow-xs border border-[#525F41]/10 p-5 space-y-4">
             <div className="border-b border-gray-100 pb-2">
               <h2 className="font-serif font-bold text-sm text-gray-800">Pengaturan QRIS Toko</h2>
